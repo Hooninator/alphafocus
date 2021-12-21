@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Usrs</h1>
+
+<div id="usrs">
+  <% @usrs.each do |usr| %>
+    <%= render usr %>
+    <p>
+      <%= link_to "Show this usr", usr %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New usr", new_usr_path %>
