@@ -1,5 +1,6 @@
 class UsrsController < ApplicationController
   before_action :set_usr, only: %i[ show edit update destroy ]
+  before_action :check_time_input, only: %i[ timer ]
 
   # GET /usrs or /usrs.json
   def index
@@ -8,6 +9,10 @@ class UsrsController < ApplicationController
 
   # GET /usrs/1 or /usrs/1.json
   def show
+    # temporary call to retrieve test user for testing purposes
+
+    @this_usr = Usr.where("usrname= 'tyler1'").first
+    @timer_url = "/usrs/#{@this_usr.id}/timer"
   end
 
   # GET /usrs/new
@@ -57,6 +62,12 @@ class UsrsController < ApplicationController
     end
   end
 
+  def timer 
+    @work = params[:worktime]
+    @rest = params[:resttime]
+    @sessions = params[:numsessions]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usr
@@ -66,5 +77,9 @@ class UsrsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def usr_params
       params.require(:usr).permit(:usrname, :password)
+    end
+
+    def check_time_input
+      # Do regex stuff to ensure the input is numbers
     end
 end

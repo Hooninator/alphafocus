@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<!--<p style="color: green"><%= notice %></p>
 
 <%= render @usr %>
 
@@ -7,4 +7,24 @@
   <%= link_to "Back to usrs", usrs_path %>
 
   <%= button_to "Destroy this usr", @usr, method: :delete %>
-</div>
+</div>-->
+
+
+<h2 class="text-center">
+Welcome to Alphafocus <%=@this_usr.usrname%>
+</h2>
+<h3>Begin a session</h3>
+<form action=<%=@timer_url%>>
+  <label for="worktime">Work Minutes:</label>
+  <input name="worktime" type="text" id="work-time">
+  <label for="resttime">Rest Minutes:</label>
+  <input name="resttime" type="text" id="rest-time">
+  <label for="numsessions">Number of sessions:</label>
+  <input name="numsessions" type="text" id="sessions">
+  <input type="submit" value="Submit">
+</form>
+
+
+<script>
+
+</script>
