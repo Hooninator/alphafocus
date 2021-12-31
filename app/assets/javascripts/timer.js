@@ -20,10 +20,12 @@ let minutes = parseInt(document.getElementById("timer").innerHTML.split(":")[0])
 document.getElementById("pause").addEventListener("click", function() {
     if (pause==true) {
         pause=false;
-        document.getElementById("timer").style.color="black"
+        document.getElementById("timer").style.color="black";
+        document.getElementById("pause").innerHTML="Pause";
     } else {
         pause=true;
-        document.getElementById("timer").style.color="red"
+        document.getElementById("timer").style.color="red";
+        document.getElementById("pause").innerHTML="Resume";
     }
 })
 
@@ -74,7 +76,9 @@ setInterval(function() {
             document.getElementById("timer").innerHTML=minutes.toString()+":0"+seconds.toString();
         }
        
-}
+    } else if (num_sessions==0) {
+        document.getElementById("work_or_rest").innerHTML="Done!";
+    }
 }, 1000)
     
     

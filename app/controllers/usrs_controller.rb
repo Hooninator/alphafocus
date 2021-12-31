@@ -69,7 +69,7 @@ class UsrsController < ApplicationController
     @sessions = params[:numsessions]
     correct_input = check_time_input(@work, @rest, @sessions)
     if correct_input==false
-      message = "Wow nice job fuckface!!! Literally its a timer put numbers jesus"
+      message = "Please only enter numbers for all three inputs!"
       redirect_to usr_path(:id => params[:id], :msg=> message)
     end
   end

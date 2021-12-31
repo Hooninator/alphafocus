@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get '/usrs/:id/timer', to: 'usrs#timer', as: 'usr_timer'
+  get '/login', to: 'login#login', as: 'login'
 end
