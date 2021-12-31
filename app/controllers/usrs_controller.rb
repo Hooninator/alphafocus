@@ -1,6 +1,6 @@
 class UsrsController < ApplicationController
   before_action :set_usr, only: %i[ show edit update destroy ]
-  before_action :check_time_input, only: %i[ timer ]
+  #before_action :check_time_input, only: %i[ timer ]
 
   # GET /usrs or /usrs.json
   def index
@@ -13,6 +13,7 @@ class UsrsController < ApplicationController
 
     @this_usr = Usr.where("usrname= 'tyler1'").first
     @timer_url = "/usrs/#{@this_usr.id}/timer"
+    @message = params[:msg]
   end
 
   # GET /usrs/new
@@ -66,6 +67,11 @@ class UsrsController < ApplicationController
     @work = params[:worktime]
     @rest = params[:resttime]
     @sessions = params[:numsessions]
+    correct_input = check_time_input(@work, @rest, @sessions)
+    if correct_input==false
+      message = "Wow nice job fuckface!!! Literally its a timer put numbers jesus"
+      redirect_to usr_path(:id => params[:id], :msg=> message)
+    end
   end
 
   private
@@ -79,7 +85,7 @@ class UsrsController < ApplicationController
       params.require(:usr).permit(:usrname, :password)
     end
 
-    def check_time_input
-      # Do regex stuff to ensure the input is numbers
+    def check_time_input(work, rest, sessions)
+      return /^\d+$/.match?(work) && /^\d+$/.match?(rest) && /^\d+$/.match?(sessions)
     end
 end

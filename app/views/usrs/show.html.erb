@@ -23,8 +23,4 @@ Welcome to Alphafocus <%=@this_usr.usrname%>
   <input name="numsessions" type="text" id="sessions">
   <input type="submit" value="Submit">
 </form>
-
-
-<script>
-
-</script>
+<%=render partial:"error", locals: {message: @msg}%>
