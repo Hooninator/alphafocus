@@ -9,9 +9,10 @@ class UsrsController < ApplicationController
 
   # GET /usrs/1 or /usrs/1.json
   def show
-    # temporary call to retrieve test user for testing purposes
+    this_user = Usr.find(params[:id])
 
-    @this_usr = Usr.where("usrname= 'tyler1'").first
+
+    @this_usr = Usr.where("usrname=?", this_user.usrname).first
     @timer_url = "/usrs/#{@this_usr.id}/timer"
     @message = params[:msg]
   end
