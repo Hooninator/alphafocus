@@ -1,14 +1,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-<h2 id="session">Session 1/<%= @sessions%></h2>
-<h3 id="workrest"><%=@work %>/<%=@rest%> pomodoro</h3>
-<h3 id="work_or_rest">Work time</h3>
+<h2 id="session" class="text-center font-weight-bold">Session 1/<%= @sessions%></h2>
+<h3 id="workrest" class="text-center"><%=@work %>/<%=@rest%> pomodoro</h3>
+<h3 id="work_or_rest" class="text-center">Work time</h3>
 
-<h1 id="timer"><%=@work%>:00</h1>
-<button id="pause" value="Pause">Pause</button>
-<button id="gamer_button">End session</button>
+<h1 id="timer" class="text-center"><%=@work%>:00</h1>
+<div class="text-center" role="group">
+    <button id="pause" value="Pause">Pause</button>
+    <button id="gamer_button">End session</button>
+</div>
 <br>
 <br>
-<%= link_to "Return", usr_path(params[:id])%>
+<%= link_to "Return", usr_path(params[:id]), class: 'btn btn-dark'%>
 <%= javascript_include_tag "timer.js"%>

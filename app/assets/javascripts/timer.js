@@ -58,6 +58,7 @@ setInterval(function() {
                 seconds-=1;
             }
         } else {
+            document.getElementById("work_or_rest").innerHTML="Work time"
             if (minutes<=0 && seconds==0) {
                 num_sessions-=1;
                 rest=true;

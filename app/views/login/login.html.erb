@@ -1,16 +1,25 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<h3><%=@success_msg%></h3>
 <br>
 <h2 class="text-center">Login to Alphafocus</h2>
 
 <br>
-
-<form>
+<%= form_with url: '/login', method: :get do |form| %>
+    <%= form.label :username, "Username:"%>
+    <%= form.text_field :username%>
+    <br>
+    <%= form.label :password, "Password:"%>
+    <%= form.text_field :password%>
+    <br>
+    <%= form.submit "Login", class: 'btn btn-dark'%>
+<%end%>
+<%=link_to 'Create Account', create_usr_path, class: 'btn btn-secondary'%>
+<!--<form>
     <label for="username">Username</label>
     <input name="username" type="text">
     <label for="password">Password</label>
     <input name="password" type="text">
+    <br>
     <input type="submit" value="Login">
-</form>
-<%=render partial:"error", locals: {message: @msg}%>
+</form>-->
+

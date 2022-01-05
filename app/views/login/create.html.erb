@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<h2 class="text-center">Create an account</h2>
+<br>
+
+<%= form_tag usrs_path, class: 'form' do %>
+    <%=label :usr, :username, "Username"%>
+    <%= text_field :usr, :username%>
+    <br>
+    <%= label :usr, :password, "Password:"%>
+    <%= text_field :usr, :password%>
+    <br>
+    <%=label :password_repeat, "Re-enter Password:"%>
+    <%=text_field :usr, :password_repeat%>
+    <br>
+    <%= submit_tag 'Create account', class: 'btn btn-dark'%>
+<%end%>
+<%=link_to 'Return to login', login_path, class: 'btn btn-secondary'%>
+<%=render partial:"error", locals: {message: @msg}%>

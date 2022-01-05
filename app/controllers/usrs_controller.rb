@@ -28,17 +28,25 @@ class UsrsController < ApplicationController
 
   # POST /usrs or /usrs.json
   def create
-    @usr = Usr.new(usr_params)
-
-    respond_to do |format|
-      if @usr.save
-        format.html { redirect_to usr_url(@usr), notice: "Usr was successfully created." }
-        format.json { render :show, status: :created, location: @usr }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @usr.errors, status: :unprocessable_entity }
-      end
+    username = params[:usr][:username]
+    password = params[:usr][:password]
+    repeat_password = params[:usr][:password_repeat]
+    duplicate_usr = Usr.where("usrname=?", username).first
+    if duplicate_usr!=nil 
+        flash[:warning]='Username taken'
+        redirect_to create_usr_path
+        return
     end
+    if password!=repeat_password
+        #Error handling 
+    end
+    if password.nil? && username.nil?
+        return
+    end
+    Usr.create({:usrname => username, :password => password})
+    flash[:notice]='Account successfully created!'
+    redirect_to login_path
+    return
   end
 
   # PATCH/PUT /usrs/1 or /usrs/1.json
@@ -70,8 +78,8 @@ class UsrsController < ApplicationController
     @sessions = params[:numsessions]
     correct_input = check_time_input(@work, @rest, @sessions)
     if correct_input==false
-      message = "Please only enter numbers for all three inputs!"
-      redirect_to usr_path(:id => params[:id], :msg=> message)
+      flash[:warning] = "Only use numbers for all 3 inputs!"
+      redirect_to usr_path(:id => params[:id])
     end
   end
 
