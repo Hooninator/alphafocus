@@ -9,11 +9,19 @@
   <%= button_to "Destroy this usr", @usr, method: :delete %>
 </div>-->
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 
 <h2 class="text-center">
 Welcome to Alphafocus <%=@this_usr.usrname%>
 </h2>
-<h3>Begin a session</h3>
+<br>
+<br>
+<br>
+<br>
+<h3 class=>Pomodoro Setup:</h3>
+<br>
 <form action=<%=@timer_url%>>
   <label for="worktime">Work Minutes:</label>
   <input name="worktime" type="text" id="work-time">
