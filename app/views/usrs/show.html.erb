@@ -14,10 +14,10 @@
 
 
 <h2 class="text-center">
-Welcome to Alphafocus <%=@this_usr.usrname%>
+Welcome to Alphafocus, <%=@this_usr.usrname%>
 </h2>
 <br>
-<br>
+<p class="blockquote"><%=@banner_msg.split("-")[0]%><br><%="~"+@banner_msg.split("-")[1]%></p>
 <br>
 <br>
 <h3 class=>Pomodoro Setup:</h3>
@@ -29,6 +29,6 @@ Welcome to Alphafocus <%=@this_usr.usrname%>
   <input name="resttime" type="text" id="rest-time">
   <label for="numsessions">Number of sessions:</label>
   <input name="numsessions" type="text" id="sessions">
-  <input type="submit" value="Begin">
+  <input type="submit" value="Begin" class= 'btn btn-danger btn-lg'>
 </form>
 <%=link_to 'Log Out', login_path, class: 'btn btn-dark'%>

@@ -1,5 +1,6 @@
 class UsrsController < ApplicationController
-  before_action :set_usr, only: %i[ show edit update destroy ]
+  before_action :set_usr, only: %i[ show edit update destroy timer ]
+  before_action :verify_token, only: %i[ show timer ]
   #before_action :check_time_input, only: %i[ timer ]
 
   # GET /usrs or /usrs.json
@@ -11,7 +12,7 @@ class UsrsController < ApplicationController
   def show
     this_user = Usr.find(params[:id])
 
-
+    @banner_msg = get_message()
     @this_usr = Usr.where("usrname=?", this_user.usrname).first
     @timer_url = "/usrs/#{@this_usr.id}/timer"
     @message = params[:msg]
@@ -32,18 +33,26 @@ class UsrsController < ApplicationController
     password = params[:usr][:password]
     repeat_password = params[:usr][:password_repeat]
     duplicate_usr = Usr.where("usrname=?", username).first
+
     if duplicate_usr!=nil 
         flash[:warning]='Username taken'
         redirect_to create_usr_path
         return
     end
+
     if password!=repeat_password
-        #Error handling 
+        flash[:warning]='Passwords do not match'
+        redirect_to create_usr_path
+        return
     end
+
     if password.nil? && username.nil?
         return
     end
-    Usr.create({:usrname => username, :password => password})
+
+    this_token = generate_token()
+
+    Usr.create({:usrname => username, :password => password, :token => this_token})
     flash[:notice]='Account successfully created!'
     redirect_to login_path
     return
@@ -91,10 +100,32 @@ class UsrsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def usr_params
-      params.require(:usr).permit(:usrname, :password)
+      params.require(:usr).permit(:usrname, :password, :token)
     end
 
     def check_time_input(work, rest, sessions)
       return /^\d+$/.match?(work) && /^\d+$/.match?(rest) && /^\d+$/.match?(sessions)
+    end
+
+    def generate_token
+      return BCrypt::Password.create("this token")
+    end
+
+    def verify_token
+      if session[:user_id]==@usr.token
+        return true
+      else
+        flash[:warning]="Please login with your username and password"
+        redirect_to login_path
+        return false
+      end
+    end
+
+    def get_message
+      message_list = ["Always remember, your focus determines your reality. -George Lucas", 
+        "The successful warrior is the average man with laser like focus. -Bruce Lee",
+        "Top gap -Tyler1"]
+      idx = Random.rand(message_list.length)
+      return message_list[idx]
     end
 end

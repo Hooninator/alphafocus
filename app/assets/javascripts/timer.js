@@ -33,7 +33,13 @@ document.getElementById("gamer_button").addEventListener("click", function() {
     let response = confirm("Are you sure you want to end the session?");
     if (response==true) {
         document.getElementById("timer").innerHTML="00:00";
-        minutes = seconds =0;
+        minutes = seconds = 0;
+        /* Doesnt work but i have no idea why
+        if (document.getElementById("work_or_rest").innerHTML=="Rest time") {
+            document.getElementById("work_or_rest").innerHTML="Work time";
+        } else {
+            document.getElementById("work_or_rest").innerHTML="Rest time";
+        }*/
     } else {
         return;
     }
